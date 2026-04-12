@@ -27,6 +27,9 @@ public class Client {
             String ipServer = stub.getServerIP();
             System.out.println("Server IP: " + ipServer);
 
+            String ipClient = stub.getClientIP();
+            System.out.println("Client IP: " + ipClient);
+
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
