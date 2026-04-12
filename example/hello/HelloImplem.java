@@ -32,8 +32,8 @@ public class HelloImplem extends UnicastRemoteObject implements Hello {
     public String getClientIP() throws RemoteException {
         String clientIP = "";
         try {
-            java.rmi.server.RemoteServer remoteServer = new java.rmi.server.RemoteServer() {};
             clientIP = java.rmi.server.RemoteServer.getClientHost();
+            System.out.println("Passou aqui");
         } catch (Exception e) {
             System.err.println("Error getting client IP: " + e.toString());
             e.printStackTrace();

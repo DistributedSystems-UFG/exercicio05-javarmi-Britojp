@@ -18,12 +18,13 @@ public class Client {
 
             Hello stub = (Hello) Naming.lookup("rmi://" + host + "/MyHello"); 
             System.out.println("Found server");
+            
             String response = stub.sayHello();
             System.out.println("Response: " + response);
 
             int result = stub.soma(100,1000);
-            
             System.out.println("Response from soma: " + result);
+            
             String ipServer = stub.getServerIP();
             System.out.println("Server IP: " + ipServer);
 
