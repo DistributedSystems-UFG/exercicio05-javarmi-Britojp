@@ -3,6 +3,7 @@ package example.person;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 public class PersonServer extends UnicastRemoteObject implements PersonService {
@@ -18,19 +19,14 @@ public class PersonServer extends UnicastRemoteObject implements PersonService {
     }
 
     public static void main(String[] args) {
-        String host = (args.length > 0) ? args[0] : null;
-        int port = 5678;
-        if (host == null) {
-            System.out.println("Uso: java PersonServer <ip-servidor>");
-            return;
-        }
         try {
-            LocateRegistry.createRegistry(port);
+            LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+            Registry registry = LocateRegistry.getRegistry();
             PersonServer server = new PersonServer();
-            String url = "rmi://" + host + ":" + port + "/PersonService";
-            Naming.rebind(url, server);
-            System.out.println("PersonServer ready at " + url);
+            Naming.rebind("PersonService", server);
+            System.err.println("PersonServer ready");
         } catch (Exception e) {
+            System.err.println("PersonServer exception: " + e.toString());
             e.printStackTrace();
         }
     }
