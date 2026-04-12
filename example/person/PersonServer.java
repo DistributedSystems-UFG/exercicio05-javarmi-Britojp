@@ -7,8 +7,8 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 public class PersonServer extends UnicastRemoteObject implements PersonService {
-    protected PersonServer() throws RemoteException {
-        super();
+    protected PersonServer(int port) throws RemoteException {
+        super(port);
     }
 
     @Override
@@ -21,8 +21,7 @@ public class PersonServer extends UnicastRemoteObject implements PersonService {
     public static void main(String[] args) {
         try {
             LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
-            Registry registry = LocateRegistry.getRegistry();
-            PersonServer server = new PersonServer();
+            PersonServer server = new PersonServer(Registry.REGISTRY_PORT);
             Naming.rebind("PersonService", server);
             System.err.println("PersonServer ready");
         } catch (Exception e) {
