@@ -20,6 +20,10 @@ public class PersonServer extends UnicastRemoteObject implements PersonService {
 
     public static void main(String[] args) {
         try {
+            String hostname = System.getProperty("java.rmi.server.hostname");
+            if (hostname != null) {
+                System.err.println("Binding RMI server to hostname: " + hostname);
+            }
             LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
             PersonServer server = new PersonServer(5678);
             Naming.rebind("PersonService", server);
