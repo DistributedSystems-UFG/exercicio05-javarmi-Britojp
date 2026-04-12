@@ -26,7 +26,7 @@ public class PersonClient {
             return;
         }
         try {
-            String url = "rmi://" + host + "/PersonService";
+            String url = "rmi://" + host + ":5678/PersonService";
             PersonService service = (PersonService) Naming.lookup(url);
             Person p = service.createPerson(name, age);
             System.out.println("Received from server: " + p);
