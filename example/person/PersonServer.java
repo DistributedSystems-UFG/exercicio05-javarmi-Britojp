@@ -21,7 +21,7 @@ public class PersonServer extends UnicastRemoteObject implements PersonService {
     public static void main(String[] args) {
         try {
             LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
-            PersonServer server = new PersonServer(Registry.REGISTRY_PORT);
+            PersonServer server = new PersonServer(5678);
             Naming.rebind("PersonService", server);
             System.err.println("PersonServer ready");
         } catch (Exception e) {
