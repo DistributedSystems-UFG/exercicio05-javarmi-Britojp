@@ -1,9 +1,6 @@
 package example.hello;
 
 import java.rmi.Naming;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 
 public class Client {
 
@@ -25,8 +22,11 @@ public class Client {
             System.out.println("Response: " + response);
 
             int result = stub.soma(100,1000);
-            System.out.println("Response from soma: " + result);
             
+            System.out.println("Response from soma: " + result);
+            String ipServer = stub.getServerIP();
+            System.out.println("Server IP: " + ipServer);
+
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
