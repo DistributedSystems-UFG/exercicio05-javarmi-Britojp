@@ -18,11 +18,18 @@ public class PersonServer extends UnicastRemoteObject implements PersonService {
     }
 
     public static void main(String[] args) {
+        String host = (args.length > 0) ? args[0] : null;
+        int port = 5678;
+        if (host == null) {
+            System.out.println("Uso: java PersonServer <ip-servidor>");
+            return;
+        }
         try {
-            LocateRegistry.createRegistry(1099);
+            LocateRegistry.createRegistry(port);
             PersonServer server = new PersonServer();
-            Naming.rebind("rmi://localhost/PersonService", server);
-            System.out.println("PersonServer ready.");
+            String url = "rmi://" + host + ":" + port + "/PersonService";
+            Naming.rebind(url, server);
+            System.out.println("PersonServer ready at " + url);
         } catch (Exception e) {
             e.printStackTrace();
         }
